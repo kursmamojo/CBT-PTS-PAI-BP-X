@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CBT PAI SMAN 1 MOJO - Kelas X</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif']
+          },
+          colors: {
+            cyber: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              800: '#064e3b',
+              900: '#022c22',
+              glow: '#00f5a0'
+            },
+            darkbg: '#0a0f18',
+            darkcard: '#111927',
+            darkborder: '#1e293b'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0a0f18;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .arabic-text {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+    }
+    .cyber-glow {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+    }
+    .cyber-glow-danger {
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+    .glass-card {
+      background: rgba(17, 25, 39, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #10b981;
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+  <header class="sticky top-0 z-40 glass-card border-b border-emerald-500/20 px-4 py-3">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-darkbg font-extrabold text-lg shadow-lg shadow-emerald-500/30">
+          <i class="fa-solid fa-kaaba"></i>
+        </div>
+        <div>
+          <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
+            CBT PAI KELAS X
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/40">HOTS v2.6</span>
+          </h1>
+          <p class="text-[11px] text-gray-400">SMAN 1 MOJO KAB. KEDIRI</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="btnRoleAdmin" onclick="openAdminAuthModal()" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+          <span class="hidden sm:inline">Portal</span> Admin
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-4xl w-full mx-auto p-3 sm:p-5 flex flex-col justify-center">
+
+    <!-- VIEW 1: REGISTRASI & TOKEN SISWA -->
+    <section id="viewStudentLogin" class="space-y-5 my-auto">
+      <div class="glass-card rounded-2xl p-5 sm:p-8 relative overflow-hidden border border-emerald-500/30 shadow-2xl">
+        <div class="absolute -right-12 -top-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="text-center mb-6">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-3">
+            <i class="fa-solid fa-book-quran"></i> Asesmen Sumatif Pembelajaran PAI
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white">Selamat Datang di CBT Siswa</h2>
+          <p class="text-xs sm:text-sm text-gray-400 mt-1">Ujian Online Kelas X (X-1 s/d X-10) SMAN 1 Mojo</p>
+        </div>
+
+        <!-- Cakupan Materi Banner -->
+        <div class="mb-5 bg-slate-900/60 p-3.5 rounded-xl border border-slate-800 text-xs space-y-1.5 text-gray-300">
+          <p class="font-semibold text-emerald-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-list-check"></i> Lingkup Materi Asesmen:
+          </p>
+          <ul class="list-disc list-inside space-y-0.5 text-gray-400 pl-1">
+            <li>Kompetisi dalam Kebaikan & Etos Kerja (Q.S. Al-Ma'idah: 48 & At-Taubah: 105)</li>
+            <li>Memahami Hakikat & Ketauhidan dengan Syu'abul Iman (Cabang Iman)</li>
+            <li>Menghindari Perilaku Mazmumah: Berfoya-foya, Riya', Sum'ah, Takabbur & Hasad</li>
+          </ul>
+        </div>
+
+        <form id="formStudentStart" onsubmit="handleStartExam(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Nama Lengkap Siswa</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-500">
+                <i class="fa-regular fa-user"></i>
+              </span>
+              <input type="text" id="inputStudentName" required placeholder="Ketik nama lengkap sesuai absen" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl py-2.5 pl-10 pr-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-gray-300 mb-1">Nomor Induk / NISN</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-500">
+                  <i class="fa-solid fa-id-card"></i>
+                </span>
+                <input type="number" id="inputStudentNISN" required placeholder="Contoh: 0071234567" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl py-2.5 pl-10 pr-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-gray-300 mb-1">Pilih Kelas</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-500">
+                  <i class="fa-solid fa-chalkboard-user"></i>
+                </span>
+                <select id="selectStudentClass" required class="w-full bg-slate-900/90 border border-slate-700 rounded-xl py-2.5 pl-10 pr-3 text-sm text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500">
+                  <option value="" disabled selected>-- Pilih Rombel Kelas --</option>
+                  <option value="X-1">Kelas X-1 SMAN 1 Mojo</option>
+                  <option value="X-2">Kelas X-2 SMAN 1 Mojo</option>
+                  <option value="X-3">Kelas X-3 SMAN 1 Mojo</option>
+                  <option value="X-4">Kelas X-4 SMAN 1 Mojo</option>
+                  <option value="X-5">Kelas X-5 SMAN 1 Mojo</option>
+                  <option value="X-6">Kelas X-6 SMAN 1 Mojo</option>
+                  <option value="X-7">Kelas X-7 SMAN 1 Mojo</option>
+                  <option value="X-8">Kelas X-8 SMAN 1 Mojo</option>
+                  <option value="X-9">Kelas X-9 SMAN 1 Mojo</option>
+                  <option value="X-10">Kelas X-10 SMAN 1 Mojo</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Token Ujian (Diberikan oleh Guru Pengawas)</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-500">
+                <i class="fa-solid fa-key"></i>
+              </span>
+              <input type="text" id="inputExamToken" uppercase required placeholder="Ketik 6 karakter token" class="w-full uppercase tracking-widest font-mono bg-slate-900/90 border border-slate-700 rounded-xl py-2.5 pl-10 pr-3 text-sm text-emerald-400 font-bold placeholder-gray-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500">
+            </div>
+            <p class="text-[11px] text-gray-400 mt-1">Default Token: <span id="labelHintToken" class="font-mono text-emerald-400 font-bold">PAI2026</span></p>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 text-sm transition transform active:scale-95">
+              <span>Mulai Asesmen CBT</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- VIEW 2: CBT EXAM SCREEN -->
+    <section id="viewExamScreen" class="hidden space-y-4">
+      <!-- Floating Top Bar Exam Status -->
+      <div class="glass-card rounded-2xl p-3 border border-emerald-500/30 flex flex-wrap items-center justify-between gap-2 shadow-lg">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">
+            <span id="badgeCurrentNum">1</span>
+          </div>
+          <div>
+            <div class="text-[11px] text-gray-400 font-medium">Peserta: <span id="barStudentName" class="text-white font-semibold">Nama Siswa</span> (<span id="barStudentClass" class="text-emerald-400 font-bold">X-1</span>)</div>
+            <div class="text-[10px] text-gray-400 flex items-center gap-2">
+              <span>Tipe: <span id="badgeTypeQuestion" class="text-teal-300 font-medium">Pilihan Ganda</span></span>
+              <span id="cheatWarningBadge" class="hidden text-rose-400 font-bold bg-rose-500/20 px-1.5 rounded border border-rose-500/40">
+                <i class="fa-solid fa-triangle-exclamation"></i> Alih Tab: <span id="cheatCount">0</span>x
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timer & Navigation Grid Opener -->
+        <div class="flex items-center gap-2 ml-auto">
+          <div class="bg-slate-900 border border-emerald-500/40 px-3 py-1.5 rounded-xl flex items-center gap-2">
+            <i class="fa-regular fa-clock text-emerald-400 animate-pulse text-xs"></i>
+            <span id="timerDisplay" class="font-mono text-sm font-bold text-emerald-300">60:00</span>
+          </div>
+          <button onclick="toggleGridModal()" class="p-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5">
+            <i class="fa-solid fa-grip"></i>
+            <span class="hidden sm:inline">Peta Soal</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Question Card Frame -->
+      <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 shadow-xl relative min-h-[380px] flex flex-col justify-between">
+        <div id="questionContainer" class="space-y-4">
+          <!-- Question Header & Badges -->
+          <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wide" id="qHeaderTopic">Materi: Kompetisi dalam Kebaikan</span>
+            </div>
+            <button id="btnBookmark" onclick="toggleBookmark()" class="text-xs px-3 py-1 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 flex items-center gap-1.5 transition">
+              <i class="fa-regular fa-bookmark" id="bookmarkIcon"></i>
+              <span id="bookmarkText">Ragu-ragu</span>
+            </button>
+          </div>
+
+          <!-- Stimulus / Text of Question -->
+          <div class="text-sm sm:text-base text-gray-100 leading-relaxed space-y-2">
+            <div id="qStimulusContainer" class="hidden p-3.5 bg-slate-900/80 rounded-xl border border-slate-800 text-xs sm:text-sm text-gray-300 mb-2"></div>
+            <div id="qText" class="font-medium">Memuat butir pertanyaan...</div>
+          </div>
+
+          <!-- Options Container -->
+          <div id="optionsContainer" class="space-y-2.5 pt-2">
+            <!-- Dynamically injected choices -->
+          </div>
+        </div>
+
+        <!-- Question Navigation Bottom Bar -->
+        <div class="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between gap-2">
+          <button id="btnPrev" onclick="navigateQuestion(-1)" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-chevron-left"></i>
+            <span>Sebelumnya</span>
+          </button>
+
+          <div class="text-xs text-gray-400 text-center font-mono">
+            <span id="answeredStats">0</span> / 35 Terjawab
+          </div>
+
+          <button id="btnNext" onclick="navigateQuestion(1)" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition">
+            <span id="nextBtnLabel">Selanjutnya</span>
+            <i class="fa-solid fa-chevron-right" id="nextBtnIcon"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: SELESAI & BUKTI PENGIRIMAN -->
+    <section id="viewResult" class="hidden space-y-5 my-auto">
+      <div class="glass-card rounded-2xl p-6 sm:p-8 text-center border border-emerald-500/40 shadow-2xl relative">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mb-4 cyber-glow">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h2 class="text-2xl font-extrabold text-white">Ujian Telah Berhasil Diselesaikan!</h2>
+        <p class="text-xs sm:text-sm text-gray-300 mt-1 max-w-md mx-auto">
+          Terima kasih atas kejujuran dan etos kerja Anda. Lembar jawaban Anda telah tersimpan secara resmi.
+        </p>
+
+        <div class="my-6 p-4 bg-slate-900/80 rounded-xl border border-slate-800 text-left space-y-2 max-w-sm mx-auto text-xs sm:text-sm">
+          <div class="flex justify-between text-gray-400">
+            <span>Nama Siswa:</span>
+            <span id="resName" class="text-white font-semibold">-</span>
+          </div>
+          <div class="flex justify-between text-gray-400">
+            <span>NISN:</span>
+            <span id="resNISN" class="text-white font-semibold">-</span>
+          </div>
+          <div class="flex justify-between text-gray-400">
+            <span>Rombel / Kelas:</span>
+            <span id="resClass" class="text-emerald-400 font-bold">-</span>
+          </div>
+          <div class="flex justify-between text-gray-400">
+            <span>Waktu Selesai:</span>
+            <span id="resTimestamp" class="text-gray-200">-</span>
+          </div>
+          <div class="flex justify-between text-gray-400">
+            <span>Indikasi Alih Layar:</span>
+            <span id="resTabSwitches" class="text-rose-400 font-bold">0 kali</span>
+          </div>
+          <div class="border-t border-slate-800 pt-2 flex justify-between items-center text-base">
+            <span class="font-bold text-gray-200">Estimasi Skor Sementara:</span>
+            <span id="resScoreBadge" class="font-mono font-extrabold text-emerald-400 text-xl">0 / 100</span>
+          </div>
+        </div>
+
+        <div id="syncStatusBox" class="p-3 rounded-xl bg-slate-800/80 border border-slate-700 text-xs flex items-center justify-center gap-2 text-gray-300 max-w-sm mx-auto">
+          <i class="fa-solid fa-circle-notch fa-spin text-emerald-400" id="syncSpinner"></i>
+          <span id="syncStatusText">Mengirim hasil ke Google Spreadsheet...</span>
+        </div>
+
+        <div class="pt-4 flex flex-col sm:flex-row gap-2 justify-center">
+          <button onclick="downloadStudentReceipt()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-file-arrow-down text-emerald-400"></i> Download Bukti PDF/Teks
+          </button>
+          <button onclick="location.reload()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-right-from-bracket"></i> Keluar ke Halaman Awal
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: ADMIN DASHBOARD (PROTECTED) -->
+    <section id="viewAdminDashboard" class="hidden space-y-6">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <h2 class="text-xl font-black text-white flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-emerald-400"></i> Server & Panel Admin CBT
+          </h2>
+          <p class="text-xs text-gray-400">SMAN 1 Mojo - Guru Mata Pelajaran PAI Kelas X</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="exitAdminView()" class="px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 text-xs font-semibold flex items-center gap-1.5">
+            <i class="fa-solid fa-door-open"></i> Tutup Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Navigation Admin -->
+      <div class="flex border-b border-slate-800 gap-2">
+        <button onclick="switchAdminTab('settings')" id="adminTabBtn-settings" class="py-2 px-4 text-xs font-bold border-b-2 border-emerald-400 text-emerald-400">
+          <i class="fa-solid fa-gear mr-1"></i> Pengaturan CBT
+        </button>
+        <button onclick="switchAdminTab('responses')" id="adminTabBtn-responses" class="py-2 px-4 text-xs font-bold border-b-2 border-transparent text-gray-400 hover:text-gray-200">
+          <i class="fa-solid fa-database mr-1"></i> Rekap Jawaban Masuk (<span id="rekapCount">0</span>)
+        </button>
+        <button onclick="switchAdminTab('gascode')" id="adminTabBtn-gascode" class="py-2 px-4 text-xs font-bold border-b-2 border-transparent text-gray-400 hover:text-gray-200">
+          <i class="fa-brands fa-google mr-1"></i> Kode Google Apps Script
+        </button>
+      </div>
+
+      <!-- Tab Content: Settings -->
+      <div id="adminTab-settings" class="space-y-4">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+          <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Konfigurasi Google Apps Script (Web App URL)
+          </h3>
+          <p class="text-xs text-gray-400">
+            Jawaban seluruh siswa akan dikirim secara otomatis via HTTP POST ke Google Spreadsheet melalui Web App URL ini.
+          </p>
+          <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Google Apps Script Web App URL</label>
+            <input type="url" id="adminGasUrl" placeholder="https://script.google.com/macros/s/AKfycb.../exec" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 px-3 text-xs text-emerald-300 font-mono focus:border-emerald-500">
+          </div>
+          <div class="flex gap-2">
+            <button onclick="saveGasUrlConfig()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition">
+              Simpan URL Integrasi
+            </button>
+            <button onclick="testGasConnection()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
+              <i class="fa-solid fa-paper-plane text-emerald-400"></i> Uji Pengiriman Dummy
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Parameter Ujian -->
+          <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
+            <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
+              <i class="fa-solid fa-clock-rotate-left"></i> Parameter Ujian
+            </h3>
+            <div>
+              <label class="block text-xs text-gray-300 mb-1">Token Ujian Siswa</label>
+              <input type="text" id="adminTokenInput" class="w-full uppercase font-mono bg-slate-900 border border-slate-700 rounded-xl py-2 px-3 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-xs text-gray-300 mb-1">Durasi Pengerjaan (Menit)</label>
+              <input type="number" id="adminDurationInput" min="10" max="180" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 px-3 text-xs text-white">
+            </div>
+            <button onclick="saveExamParameters()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 rounded-xl text-xs font-bold transition">
+              Simpan Parameter
+            </button>
+          </div>
+
+          <!-- Keamanan Admin Password -->
+          <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
+            <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
+              <i class="fa-solid fa-lock"></i> Ubah Password Admin
+            </h3>
+            <div>
+              <label class="block text-xs text-gray-300 mb-1">Password Baru Admin</label>
+              <input type="password" id="adminNewPass" placeholder="Minimal 6 karakter" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 px-3 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-xs text-gray-300 mb-1">Konfirmasi Password Baru</label>
+              <input type="password" id="adminConfirmPass" placeholder="Ulangi password baru" class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 px-3 text-xs text-white">
+            </div>
+            <button onclick="changeAdminPassword()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 rounded-xl text-xs font-bold transition">
+              Perbarui Password Server
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Rekap Jawaban Masuk -->
+      <div id="adminTab-responses" class="hidden space-y-4">
+        <div class="glass-card rounded-2xl p-4 border border-slate-800 flex justify-between items-center flex-wrap gap-2">
+          <div class="text-xs text-gray-300">
+            Daftar siswa yang telah menyelesaikan asesmen di perangkat ini atau sinkronisasi lokal.
+          </div>
+          <div class="flex gap-2">
+            <button onclick="exportResponsesCSV()" class="px-3 py-1.5 rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 text-xs font-bold hover:bg-emerald-600/50">
+              <i class="fa-solid fa-file-csv mr-1"></i> Unduh CSV
+            </button>
+            <button onclick="clearLocalResponses()" class="px-3 py-1.5 rounded-lg bg-rose-600/30 text-rose-300 border border-rose-500/40 text-xs font-bold hover:bg-rose-600/50">
+              <i class="fa-solid fa-trash mr-1"></i> Hapus Rekap
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-x-auto custom-scroll">
+          <table class="w-full text-left text-xs text-gray-300">
+            <thead class="bg-slate-900/90 text-emerald-400 border-b border-slate-800 uppercase font-mono text-[11px]">
+              <tr>
+                <th class="p-3">Waktu</th>
+                <th class="p-3">NISN</th>
+                <th class="p-3">Nama Siswa</th>
+                <th class="p-3">Kelas</th>
+                <th class="p-3">Skor</th>
+                <th class="p-3">Alih Tab</th>
+                <th class="p-3">Status Sinkron</th>
+              </tr>
+            </thead>
+            <tbody id="tableResponsesBody" class="divide-y divide-slate-800">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab Content: Google Apps Script Template Code -->
+      <div id="adminTab-gascode" class="hidden space-y-4">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
+              <i class="fa-brands fa-google text-emerald-400"></i> Kode Google Apps Script Siap Salin
+            </h3>
+            <button onclick="copyGasScript()" class="px-3 py-1 rounded-lg bg-emerald-500 text-darkbg font-bold text-xs hover:bg-emerald-400 transition">
+              <i class="fa-regular fa-copy"></i> Salin Skrip
+            </button>
+          </div>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Cara Pasang:
+            1. Buka <strong>Google Sheets</strong> baru.
+            2. Klik menu <strong>Ekstensi &gt; Apps Script</strong>.
+            3. Hapus semua kode default, lalu tempel kode di bawah ini.
+            4. Klik <strong>Terapkan (Deploy) &gt; Deployment Baru</strong> &gt; Pilih Jenis: <em>Aplikasi Web (Web App)</em>.
+            5. Set <em>Akses: Siapa saja (Anyone)</em> lalu Deploy dan salin URL Web App ke form pengaturan admin CBT di atas.
+          </p>
+          <pre id="gasScriptArea" class="bg-slate-950 p-4 rounded-xl text-[11px] font-mono text-emerald-300/90 overflow-x-auto border border-slate-800 max-h-80 custom-scroll"></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: DAFTAR PETA SOAL / GRID PALET -->
+  <div id="modalGrid" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-2xl border border-emerald-500/40 p-5 space-y-4 max-h-[85vh] flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-table-cells text-emerald-400"></i> Navigasi Butir Soal (35 Butir)
+        </h3>
+        <button onclick="toggleGridModal()" class="text-gray-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-between text-[11px] text-gray-400 px-1">
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-600 inline-block"></span> Terjawab</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-yellow-500 inline-block"></span> Ragu-ragu</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-800 border border-slate-700 inline-block"></span> Kosong</span>
+      </div>
+
+      <div id="gridPaletteButtons" class="grid grid-cols-5 sm:grid-cols-7 gap-2 overflow-y-auto custom-scroll p-1 flex-grow">
+        <!-- Injected via JS -->
+      </div>
+
+      <div class="pt-2 border-t border-slate-800 flex justify-end">
+        <button onclick="toggleGridModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-gray-200">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: KONFIRMASI SUBMIT UJIAN -->
+  <div id="modalConfirmSubmit" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-sm w-full rounded-2xl border border-emerald-500/40 p-5 space-y-4 text-center shadow-2xl">
+      <div class="w-12 h-12 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center mx-auto text-xl">
+        <i class="fa-solid fa-circle-question"></i>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-white">Selesaikan Ujian Sekarang?</h3>
+        <p class="text-xs text-gray-300 mt-1" id="confirmSubmitDesc">
+          Pastikan seluruh pertanyaan telah Anda periksa kembali dengan teliti.
+        </p>
+      </div>
+
+      <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-xs text-left space-y-1">
+        <div class="flex justify-between text-gray-400">
+          <span>Sudah Dijawab:</span>
+          <span id="confirmAnsweredCount" class="text-emerald-400 font-bold">0</span>
+        </div>
+        <div class="flex justify-between text-gray-400">
+          <span>Ragu-ragu:</span>
+          <span id="confirmDoubtCount" class="text-yellow-400 font-bold">0</span>
+        </div>
+        <div class="flex justify-between text-gray-400">
+          <span>Belum Dijawab:</span>
+          <span id="confirmUnansweredCount" class="text-rose-400 font-bold">0</span>
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="closeConfirmModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-gray-300">
+          Kembali Periksa
+        </button>
+        <button onclick="executeFinalSubmit()" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white">
+          Ya, Kumpulkan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LOGIN ADMIN -->
+  <div id="modalAdminAuth" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-sm w-full rounded-2xl border border-slate-700 p-5 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-emerald-400"></i> Autentikasi Guru / Admin
+        </h3>
+        <button onclick="closeAdminAuthModal()" class="text-gray-400 hover:text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <p class="text-xs text-gray-400">Masukkan kata sandi server untuk membuka panel pengaturan CBT SMAN 1 Mojo.</p>
+      <div>
+        <label class="block text-xs font-medium text-gray-300 mb-1">Password Admin</label>
+        <input type="password" id="inputAdminPass" placeholder="Ketik kata sandi..." class="w-full bg-slate-900 border border-slate-700 rounded-xl py-2 px-3 text-sm text-white focus:border-emerald-500">
+        <p class="text-[10px] text-gray-400 mt-1">Default Password: <span class="font-mono text-emerald-400">adminSMAN1Mojo</span></p>
+      </div>
+      <div id="adminAuthError" class="text-xs text-rose-400 font-semibold hidden">
+        <i class="fa-solid fa-circle-exclamation mr-1"></i> Kata sandi salah. Akses ditolak!
+      </div>
+      <div class="flex justify-end gap-2 pt-1">
+        <button onclick="closeAdminAuthModal()" class="px-3 py-2 rounded-xl bg-slate-800 text-xs text-gray-300">Batal</button>
+        <button onclick="verifyAdminLogin()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white">Buka Panel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CUSTOM ALERT NOTIFICATION -->
+  <div id="modalNotice" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-xs w-full rounded-2xl border border-emerald-500/40 p-4 space-y-3 text-center shadow-xl">
+      <div id="noticeIconContainer" class="w-10 h-10 rounded-full mx-auto flex items-center justify-center text-lg bg-emerald-500/20 text-emerald-400">
+        <i class="fa-solid fa-bell" id="noticeIcon"></i>
+      </div>
+      <h4 id="noticeTitle" class="text-sm font-bold text-white">Pemberitahuan</h4>
+      <p id="noticeMessage" class="text-xs text-gray-300 leading-normal"></p>
+      <button onclick="closeNoticeModal()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold">
+        Mengerti
+      </button>
+    </div>
+  </div>
+
+  <footer class="py-3 px-4 text-center text-[11px] text-gray-400 border-t border-slate-800/60 mt-4">
+    <p>Aplikasi Asesmen PAI & Budi Pekerti Kelas X &bull; SMAN 1 Mojo Kediri</p>
+    <p class="text-[10px] text-gray-400 mt-0.5">Mendukung Pembelajaran Bermakna Kurikulum Merdeka</p>
+  </footer>
+
+  <script>
+    /* CBT PAI SMAN 1 MOJO - STATE ENGINE */
+    const APP_CONFIG = {
+      defaultToken: "PAI2026",
+      defaultDurationMinutes: 60,
+      defaultAdminPass: "adminSMAN1Mojo",
+      // URL Google Apps Script terintegrasi langsung untuk dokumentasi Spreadsheet
+      defaultGasUrl: "https://script.google.com/macros/s/AKfycbw5z0Pih8xILceqxXjewpeX9N3IsR8chAQUtwk3EFDCowAlyE7Evf5_7w9B8-Z2ABk_/exec"
+    };
+
+    // State object in memory (session persistence)
+    let state = {
+      currentUser: null,
+      examToken: APP_CONFIG.defaultToken,
+      examDuration: APP_CONFIG.defaultDurationMinutes,
+      adminPass: APP_CONFIG.defaultAdminPass,
+      gasUrl: APP_CONFIG.defaultGasUrl,
+      currentIndex: 0,
+      studentAnswers: {}, // { [questionId]: answerValue }
+      doubtfulFlags: {},  // { [questionId]: boolean }
+      tabSwitchCount: 0,
+      timerSeconds: 60 * 60,
+      timerInterval: null,
+      examFinished: false,
+      submissionsLog: []
+    };
+
+    /*
+      35 SOAL HOTS PAI KELAS X:
+      Materi 1: Kompetisi dalam Kebaikan & Etos Kerja (Q.S. Al-Ma'idah/5: 48 & At-Taubah/9: 105)
+      Materi 2: Hakikat Ketauhidan & Syu'abul Iman (77 Cabang Iman: Qalbi, Lisani, Arkan)
+      Materi 3: Menghindari Perilaku Mazmumah: Berfoya-foya, Riya', Sum'ah, Takabbur, & Hasad
+      
+      Format:
+      - 15 Pilihan Ganda Tunggal (Q1 - Q15) [A, B, C, D, E]
+      - 15 Pilihan Ganda Kompleks (Q16 - Q30) [Multi-choice checkboxes]
+      - 5 Pilihan Ganda Kategori / Relasi HOTS (Q31 - Q35) [Matriks Asosiasi]
+    */
+    const QUESTION_BANK = [
+      // ====== 15 PG TUNGGAL (Q1 - Q15) ======
+      {
+        id: 1,
+        type: 'single',
+        topic: "Kompetisi dalam Kebaikan",
+        stimulus: "Perhatikan kutipan ayat berikut:<br><span class='arabic-text text-base sm:text-lg block my-1 text-emerald-300'>فَاسْتَبِقُوا الْخَيْرَاتِ ۚ إِلَى اللَّهِ مَرْجِعُكُمْ جَمِيعًا فَيُنَبِّئُكُمْ بِمَا كُنْتُمْ فِيهِ تَخْتَلِفُونَ</span> (Q.S. Al-Ma'idah/5: 48)",
+        question: "Berdasarkan analisis terhadap potongan ayat di atas, pesan pokok yang paling tepat untuk diaktualisasikan oleh peserta didik dalam kehidupan di era disrupsi digital adalah...",
+        options: [
+          { key: "A", text: "Menghindari persaingan karena berpotensi merusak ukhuwah islamiyah." },
+          { key: "B", text: "Berlomba-lomba menghasilkan karya positif dan inovasi kebajikan secara kolektif tanpa menunda-nunda waktu." },
+          { key: "C", text: "Menunggu orang lain memulai kebajikan baru kemudian mengikutinya agar terhindar dari riya'." },
+          { key: "D", text: "Mengabaikan perbedaan pandangan sosial dan fokus hanya pada ibadah mahdhah secara personal." },
+          { key: "E", text: "Menjadikan materi duniawi sebagai tolok ukur utama dalam memenangkan kompetisi pergaulan." }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 2,
+        type: 'single',
+        topic: "Etos Kerja Islami",
+        stimulus: "Dalam Q.S. At-Taubah/9: 105 ditegaskan: <em>'Dan katakanlah: Bekerjalah kamu, maka Allah dan Rasul-Nya serta orang-orang mukmin akan melihat pekerjaanmu itu...'</em>",
+        question: "Seorang siswa SMAN 1 Mojo bertekad belajar giat bukan semata demi pujian guru atau ranking kelas, melainkan meyakini bahwa belajar adalah amanah pengabdian kepada Allah Swt. Karakter etos kerja tersebut mencerminkan dimensi...",
+        options: [
+          { key: "A", text: "Transendental dan integritas moral (Ihsan dalam menuntut ilmu)" },
+          { key: "B", text: "Materialistis pragmatis demi prestise keluarga" },
+          { key: "C", text: "Sikap pasrah tanpa perencanaan belajar yang rasional" },
+          { key: "D", text: "Kompetisi tidak sehat untuk menjatuhkan saingan akademik" },
+          { key: "E", text: "Formalitas menunaikan kewajiban administratif sekolah" }
+        ],
+        correct: "A",
+        weight: 2.5
+      },
+      {
+        id: 3,
+        type: 'single',
+        topic: "Syu'abul Iman (Hakikat Iman)",
+        stimulus: "Iman tidak cukup sebatas keyakinan dalam angan-angan, melainkan harus terintegrasi dalam trilogi keimanan menurut hadis Nabi Muhammad saw.",
+        question: "Definisi iman yang komprehensif menurut pandangan Ahlussunnah wal Jama'ah adalah...",
+        options: [
+          { key: "A", text: "Cukup diyakini di dalam hati tanpa kewajiban melafalkan ataupun mengamalkannya" },
+          { key: "B", text: "Pembenaran dalam hati (tashdiqul bil qalb), ikrar dengan lisan, dan pembuktian dengan amal perbuatan (amalun bil arkan)" },
+          { key: "C", text: "Ketaatan lisan semata saat berada di hadapan sesama manusia" },
+          { key: "D", text: "Pengakuan intelektual tanpa memerlukan kepatuhan terhadap norma syariat" },
+          { key: "E", text: "Perbuatan lahiriah semata sekalipun batin menolak nilai-nilai wahyu" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 4,
+        type: 'single',
+        topic: "Cabang Iman (Syu'abul Iman)",
+        stimulus: "Rasulullah saw. bersabda: <em>'Iman itu memiliki tujuh puluh lebih cabang. Yang paling utama adalah ucapan Laa ilaaha illallaah, dan yang paling rendah adalah menyingkirkan duri/rintangan dari jalan, dan malu adalah cabang dari iman.'</em> (HR. Muslim).",
+        question: "Berdasarkan hadis tersebut, perbuatan seorang siswa membuang sampah berserakan di lorong kelas atau menyingkirkan paku di jalan menuju SMAN 1 Mojo merupakan manifestasi cabang iman yang berkaitan dengan...",
+        options: [
+          { key: "A", text: "Dimensi lisan (ikrarun bil lisan)" },
+          { key: "B", text: "Dimensi anggota badan (amalun bil arkan) demi kemaslahatan publik" },
+          { key: "C", text: "Dimensi kalbu semata (ma'rifatun bil qalb)" },
+          { key: "D", text: "Ibadah khusus mahdhah yang harus dikerjakan di masjid" },
+          { key: "E", text: "Formalitas menjaga nilai raport pendidikan lingkungan" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 5,
+        type: 'single',
+        topic: "Menghindari Berfoya-foya (Israf & Tabdzir)",
+        stimulus: "Perhatikan firman Allah Swt.:<br><span class='arabic-text text-base block my-1 text-emerald-300'>إِنَّ الْمُبَذِّرِينَ كَانُوا إِخْوَانَ الشَّيَاطِينِ ۖ وَكَانَ الشَّيْطَانُ لِرَبِّهِ كَفُورًا</span> (Q.S. Al-Isra'/17: 27)",
+        question: "Perilaku tabdzir dan israf yang kerap menjangkiti generasi muda saat merayakan kelulusan atau tren gaya hidup hedonis di media sosial dapat merusak tatanan pribadi karena...",
+        options: [
+          { key: "A", text: "Menghabiskan harta untuk kemaksiatan atau pengeluaran sia-sia yang mengikis rasa syukur kepada Allah" },
+          { key: "B", text: "Menyebabkan seseorang cepat dihormati oleh komunitasnya" },
+          { key: "C", text: "Mendorong perputaran roda ekonomi pasar bebas secara serampangan" },
+          { key: "D", text: "Membuat pelakunya menjadi pribadi yang dermawan tanpa batas" },
+          { key: "E", text: "Hanya berdampak pada berkurangnya saldo tabungan tanpa dosa" }
+        ],
+        correct: "A",
+        weight: 2.5
+      },
+      {
+        id: 6,
+        type: 'single',
+        topic: "Riya' dan Sum'ah",
+        stimulus: "Ahmad selalu melantunkan bacaan Al-Qur'an dengan nada indah saat berada di mushola sekolah agar dipuji guru dan teman-temannya. Ketika sendirian di kamar, ia sama sekali enggan membacanya.",
+        question: "Penyakit hati yang melanda perilaku Ahmad dalam terminologi akhlak Islam dikategorikan sebagai...",
+        options: [
+          { key: "A", text: "Hasad (dengki)" },
+          { key: "B", text: "Riya' (menampakkan amal shaleh demi pandangan manusia)" },
+          { key: "C", text: "Takabbur (sombong)" },
+          { key: "D", text: "Ghadab (marah)" },
+          { key: "E", text: "Namimah (adu domba)" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 7,
+        type: 'single',
+        topic: "Bahaya Penyakit Sum'ah",
+        stimulus: "Secara etimologi, kata <em>sum'ah</em> berasal dari bahasa Arab <em>'samma'a'</em>. Seseorang memperdengarkan atau menceritakan amalan masa lalunya kepada orang lain.",
+        question: "Tujuan utama orang yang terkena penyakit batin <em>sum'ah</em> adalah...",
+        options: [
+          { key: "A", text: "Memperoleh simpati berupa bantuan materi" },
+          { key: "B", text: "Mendapatkan popularitas, kedudukan, atau reputasi kemuliaan di telinga khalayak" },
+          { key: "C", text: "Menyampaikan ilmu pengetahuan secara transparan" },
+          { key: "D", text: "Mendorong orang lain agar meniru amalan rahasianya" },
+          { key: "E", text: "Melindungi diri dari tuduhan prasangka buruk" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 8,
+        type: 'single',
+        topic: "Mencegah Sifat Takabbur",
+        stimulus: "Rasulullah saw. menjelaskan hakikat sombong: <em>'Al-kibru batharul haqqi wa ghamthun naas'</em> (HR. Muslim).",
+        question: "Berdasarkan sabda Nabi tersebut, dua esensi utama dari sifat takabbur (sombong) adalah...",
+        options: [
+          { key: "A", text: "Berpakaian bersih dan senang memakai wewangian" },
+          { key: "B", text: "Menolak kebenaran dan meremehkan/merendahkan orang lain" },
+          { key: "C", text: "Berbicara dengan suara lantang dan tegas saat berpidato" },
+          { key: "D", text: "Menuntut hak secara legal di pengadilan hukum" },
+          { key: "E", text: "Menyimpan kekayaan untuk modal usaha produktif" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 9,
+        type: 'single',
+        topic: "Dampak Destruktif Hasad",
+        stimulus: "Nabi saw. bersabda: <em>'Jauhilah olehmu sifat hasad, karena sesungguhnya hasad itu memakan kebaikan seperti api memakan kayu bakar.'</em> (HR. Abu Dawud).",
+        question: "Mengapa sifat hasad (dengki) dianalogikan melenyapkan kebaikan sebagaimana api membakar kayu?",
+        options: [
+          { key: "A", text: "Karena orang hasad secara batin hakikatnya menentang takdir dan pembagian karunia Allah terhadap sesama" },
+          { key: "B", text: "Karena hasad hanya menguras energi fisik seseorang saat bekerja" },
+          { key: "C", text: "Karena orang hasad selalu didenda dalam hukum pidana syariat" },
+          { key: "D", text: "Karena sifat hasad menular melalui kontak fisik secara langsung" },
+          { key: "E", text: "Karena hasad hanya merugikan orang yang didengki saja" }
+        ],
+        correct: "A",
+        weight: 2.5
+      },
+      {
+        id: 10,
+        type: 'single',
+        topic: "Etos Kerja dan Disiplin Waktu",
+        stimulus: "Pepatah Arab menyatakan: <em>'Al-Waqtu kassaif, in lam taqtha'hu qatha'aka'</em> (Waktu laksana pedang, jika engkau tidak menebasnya maka ia yang akan menebasmu).",
+        question: "Korelasi nilai pepatah tersebut dengan etos kerja seorang muslim adalah...",
+        options: [
+          { key: "A", text: "Bekerja tanpa henti hingga melupakan hak tubuh dan ibadah" },
+          { key: "B", text: "Memanfaatkan waktu dengan produktif, disiplin, dan terencana sebelum kesempatan hilang" },
+          { key: "C", text: "Menghindari pekerjaan berat agar usia tidak cepat lelah" },
+          { key: "D", text: "Mengejar karir setinggi-tingginya dengan mengabaikan prinsip halal-haram" },
+          { key: "E", text: "Menyerahkan keberhasilan pada nasib tanpa usaha konkret" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 11,
+        type: 'single',
+        topic: "Cabang Iman Berkaitan Hati",
+        stimulus: "Dari 77 cabang iman (syu'abul iman), para ulama membaginya menjadi tiga pilar: hati, lisan, dan anggota badan.",
+        question: "Di bawah ini yang merupakan cabang iman yang berpusat pada kalbu (ma'rifatun bil qalb) adalah...",
+        options: [
+          { key: "A", text: "Mengucap dzikir dan membaca sholawat Nabi" },
+          { key: "B", text: "Ikhlas dalam beramal, tawakkal, dan cinta kepada Allah dan Rasul-Nya" },
+          { key: "C", text: "Menunaikan zakat fitrah dan sholat jenazah" },
+          { key: "D", text: "Mengajarkan ilmu tajwid kepada adik kelas" },
+          { key: "E", text: "Menyambung tali silaturahim dengan berkunjung ke rumah kerabat" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 12,
+        type: 'single',
+        topic: "Solusi Menghindari Riya'",
+        stimulus: "Seorang pelajar merasa hatinya sering bergetar ingin dipuji ketika menjadi muazin atau imam sholat di masjid sekolah.",
+        question: "Langkah kuratif batiniah yang paling tepat dilakukan sesuai bimbingan tazkiyatun nafs adalah...",
+        options: [
+          { key: "A", text: "Berhenti total menjadi imam selamanya agar selamat dari riya'" },
+          { key: "B", text: "Terus berlatih meluruskan niat lillahi ta'ala, memperbanyak doa perlindungan dari syirik kecil, dan membiasakan sedekah sirri (sembunyi-sembunyi)" },
+          { key: "C", text: "Menceritakan keraguan niatnya kepada semua teman agar dimaklumi" },
+          { key: "D", text: "Mempercepat gerakan sholat supaya tidak dicurigai orang lain" },
+          { key: "E", text: "Menganggap riya' wajar bagi pemula sehingga tidak perlu diobati" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 13,
+        type: 'single',
+        topic: "Tafsir Q.S. Al-Ma'idah: 48",
+        stimulus: "Firman Allah: <em>'Untuk setiap umat di antara kamu, Kami berikan aturan dan jalan yang terang...'</em> (Q.S. Al-Ma'idah: 48).",
+        question: "Sikap seorang muslim di tengah kemajemukan suku, ras, dan agama di Indonesia sesuai tuntunan ayat tersebut adalah...",
+        options: [
+          { key: "A", text: "Memaksakan keyakinan sendiri kepada umat lain secara represif" },
+          { key: "B", text: "Menjunjung toleransi, hidup rukun, dan saling beradu dalam karya kebajikan sosial kemanusiaan" },
+          { key: "C", text: "Mencampuradukkan akidah dan ritual peribadatan antaragama demi persatuan" },
+          { key: "D", text: "Bersikap apatis dan menutup diri dari pergaulan kebangsaan" },
+          { key: "E", text: "Mengakui kebenaran teologis semua ajaran tanpa prinsip ketauhidan" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 14,
+        type: 'single',
+        topic: "Perilaku Ghibah Akibat Hasad",
+        stimulus: "Ketika ada teman sekelas yang terpilih menjadi ketua OSIS, Fulan merasa tidak senang lalu mulai menyebarkan aib masa lalu temannya tersebut di grup WhatsApp.",
+        question: "Akar penyakit moral yang mendorong tindakan Fulan dan dosa turunan yang dilakukannya secara berurutan adalah...",
+        options: [
+          { key: "A", text: "Qana'ah dan Tabayyun" },
+          { key: "B", text: "Hasad (iri hati) yang memicu perbuatan ghibah dan fitnah" },
+          { key: "C", text: "Israf yang memicu takabbur" },
+          { key: "D", text: "Syaja'ah yang memicu optimisme" },
+          { key: "E", text: "Tawadhu' yang memicu sikap kritis" }
+        ],
+        correct: "B",
+        weight: 2.5
+      },
+      {
+        id: 15,
+        type: 'single',
+        topic: "Gaya Hidup Bersahaja (Iqtishad)",
+        stimulus: "Islam mengajarkan prinsip proporsionalitas dalam membelanjakan rezeki, sebagaimana firman Allah dalam Q.S. Al-Furqan/25: 67.",
+        question: "Ciri hamba Allah yang mulia (Ibadurrahman) dalam urusan finansial adalah...",
+        options: [
+          { key: "A", text: "Sangat kikir demi menumpuk kekayaan warisan" },
+          { key: "B", text: "Menghabiskan harta seketika saat menerima uang saku" },
+          { key: "C", text: "Tidak berlebih-lebihan (israf) dan tidak pula kikir, melainkan mengambil jalan tengah yang berkeadilan" },
+          { key: "D", text: "Selalu meminjam uang untuk memenuhi gaya hidup konsumtif terkini" },
+          { key: "E", text: "Enggan berinfaq karena takut miskin di kemudian hari" }
+        ],
+        correct: "C",
+        weight: 2.5
+      },
+
+      // ====== 15 PG KOMPLEKS (Q16 - Q30: Pilihan Lebih Dari Satu) ======
+      {
+        id: 16,
+        type: 'complex',
+        topic: "Karakteristik Fastabiqul Khairat",
+        stimulus: "Kompetisi dalam kebaikan (Fastabiqul Khairat) memiliki adab dan rambu-rambu syar'i agar tidak bergeser menjadi ajang permusuhan.",
+        question: "Pilihlah DUA atau LEBIH pernyataan yang mencerminkan etika kompetisi dalam kebaikan yang benar menurut ajaran Islam! (Jawaban benar lebih dari satu)",
+        options: [
+          { key: "A", text: "Berniat semata-mata mengharap ridha Allah Swt. bukan popularitas." },
+          { key: "B", text: "Menghalalkan segala cara asalkan tujuannya untuk memenangkan persaingan." },
+          { key: "C", text: "Menghargai kelebihan kompetitor dan siap berkolaborasi dalam kebajikan." },
+          { key: "D", text: "Konsisten (istiqomah) dan bersegera melakukan amal tanpa menunda." },
+          { key: "E", text: "Mengejek kekurangan kelompok lawan demi menaikkan mental anggota sendiri." }
+        ],
+        correct: ["A", "C", "D"],
+        weight: 3.0
+      },
+      {
+        id: 17,
+        type: 'complex',
+        topic: "Dimensi Syu'abul Iman bil Lisan",
+        stimulus: "Lisan merupakan cerminan isi hati. Rasulullah saw. memasukkan sejumlah amalan lisan ke dalam cabang-cabang keimanan.",
+        question: "Manakah amalan-amalan di bawah ini yang tergolong dalam cabang iman melalui lisan (ikrarun bil lisan)? (Pilihlah pernyataan yang benar!)",
+        options: [
+          { key: "A", text: "Membaca kalimat Thayyibah dan melafalkan Syahadatain." },
+          { key: "B", text: "Membaca ayat-ayat suci Al-Qur'an dan mengajarkannya." },
+          { key: "C", text: "Menjawab salam dan mendoakan orang yang bersin (tasymit)." },
+          { key: "D", text: "Membayar zakat mal di kantor BAZNAS kabupaten." },
+          { key: "E", text: "Berpuasa sunnah Senin-Kamis secara berkala." }
+        ],
+        correct: ["A", "B", "C"],
+        weight: 3.0
+      },
+      {
+        id: 18,
+        type: 'complex',
+        topic: "Tanda-Tanda Penyakit Riya' Menurut Sayyidina Ali",
+        stimulus: "Sayyidina Ali bin Abi Thalib r.a. merumuskan beberapa indikator orang yang terjangkiti riya' dalam ibadah.",
+        question: "Tentukan tanda-tanda riya' yang benar menurut nasihat para salafus shalih! (Pilih opsi yang tepat)",
+        options: [
+          { key: "A", text: "Malas beribadah saat berada dalam kesendirian." },
+          { key: "B", text: "Tiba-tiba bersemangat dan khusyuk saat ada banyak orang yang melihatnya." },
+          { key: "C", text: "Amalnya meningkat pesat bila dipuji dan menurun drastis bila dicela orang." },
+          { key: "D", text: "Selalu menyembunyikan sedekahnya hingga tangan kirinya tidak tahu." },
+          { key: "E", text: "Merasa bahagia karena telah ditolong Allah untuk menunaikan kebaikan." }
+        ],
+        correct: ["A", "B", "C"],
+        weight: 3.0
+      },
+      {
+        id: 19,
+        type: 'complex',
+        topic: "Dampak Bahaya Perilaku Takabbur",
+        stimulus: "Sifat sombong (takabbur) adalah dosa awal yang membuat Iblis terusir dari surga Allah Swt.",
+        question: "Berikut ini yang merupakan dampak destruktif dari sikap takabbur bagi kehidupan pribadi dan sosial adalah...",
+        options: [
+          { key: "A", text: "Tertutupnya pintu hidayah dan kebenaran ke dalam lubuk hati." },
+          { key: "B", text: "Dimusuhi dan dijauhi oleh masyarakat sekitar dalam interaksi sosial." },
+          { key: "C", text: "Mendapat kemuliaan abadi di sisi Allah pada hari akhirat." },
+          { key: "D", text: "Diancam dengan siksa neraka dan dihinakan pada hari hisab." },
+          { key: "E", text: "Menjadikan seseorang semakin dicintai fakir miskin." }
+        ],
+        correct: ["A", "B", "D"],
+        weight: 3.0
+      },
+      {
+        id: 20,
+        type: 'complex',
+        topic: "Ciri-Ciri Etos Kerja Tinggi",
+        stimulus: "Islam memandang bekerja bukan sekadar mencari nafkah, melainkan jihad fi sabilillah dan penopang kehormatan diri.",
+        question: "Sikap yang mencerminkan etos kerja islami seorang muslim dalam kehidupan modern meliputi...",
+        options: [
+          { key: "A", text: "Bekerja secara profesional (itqan) dan teliti terhadap hasil pekerjaan." },
+          { key: "B", text: "Menjaga kejujuran dan amanah tanpa melakukan korupsi waktu." },
+          { key: "C", text: "Mengabaikan shalat lima waktu demi mengejar target lembur pekerjaan." },
+          { key: "D", text: "Memiliki jiwa pantang menyerah dan senantiasa berinovasi." },
+          { key: "E", text: "Mengandalkan bantuan orang tua tanpa mau berikhtiar mandiri." }
+        ],
+        correct: ["A", "B", "D"],
+        weight: 3.0
+      },
+      {
+        id: 21,
+        type: 'complex',
+        topic: "Cara Mengobati Sifat Hasad",
+        stimulus: "Hasad dapat diobati dengan memadukan terapi ilmu (pemahaman tauhid) dan terapi amal nyata.",
+        question: "Tindakan yang tepat untuk meredam timbulnya hasad dalam pergaulan di sekolah adalah...",
+        options: [
+          { key: "A", text: "Meyakini dengan sadar bahwa rezeki dan talenta setiap orang telah diatur oleh Allah Yang Maha Adil." },
+          { key: "B", text: "Mendoakan keberkahan bagi teman yang memperoleh nikmat atau prestasi." },
+          { key: "C", text: "Memaksa teman tersebut membagi hadiah lombanya kepada kita." },
+          { key: "D", text: "Mengembangkan rasa syukur terhadap segala karunia yang telah dimiliki sendiri." },
+          { key: "E", text: "Mencari-cari kelemahan teman di medsos untuk menghibur diri." }
+        ],
+        correct: ["A", "B", "D"],
+        weight: 3.0
+      },
+      {
+        id: 22,
+        type: 'complex',
+        topic: "Bentuk-Bentuk Cabang Iman Berkaitan Anggota Badan",
+        stimulus: "Syu'abul iman bil arkan adalah pembuktian iman melalui tindakan ragawi konkret yang memberi manfaat.",
+        question: "Manakah aktivitas siswa di lingkungan SMAN 1 Mojo yang mencerminkan cabang iman anggota badan? (Pilih yang sesuai)",
+        options: [
+          { key: "A", text: "Mengikuti piket kebersihan kelas dan merawat tanaman taman sekolah." },
+          { key: "B", text: "Membantu menyeberangkan anak sekolah dasar di jalan raya depan sekolah." },
+          { key: "C", text: "Melaksanakan sujud syukur saat dinyatakan lolos seleksi beasiswa." },
+          { key: "D", text: "Mengeluh dalam hati karena tugas sekolah terlalu banyak." },
+          { key: "E", text: "Tidur di pojok kelas saat guru menerangkan materi pelajaran." }
+        ],
+        correct: ["A", "B", "C"],
+        weight: 3.0
+      },
+      {
+        id: 23,
+        type: 'complex',
+        topic: "Beda Perilaku Israf dan Tabdzir",
+        stimulus: "Ulama fikih membedakan antara konsep israf (berlebihan) dan tabdzir (pemborosan).",
+        question: "Pilihlah pernyataan yang BENAR mengenai perbandingan israf dan tabdzir berikut ini!",
+        options: [
+          { key: "A", text: "Israf terjadi pada hal yang halal namun dikonsumsi melampaui batas kewajaran." },
+          { key: "B", text: "Tabdzir adalah mengeluarkan harta untuk perkara yang haram atau sia-sia (maksiat/mubazir)." },
+          { key: "C", text: "Israf dan tabdzir adalah sifat terpuji dalam memajukan perekonomian pedagang pasar." },
+          { key: "D", text: "Membeli makanan halal namun dibuang ke tempat sampah karena kekenyangan mencakup israf sekaligus tabdzir." },
+          { key: "E", text: "Membayar uang SPP dan membeli kitab suci termasuk dalam kategori tabdzir." }
+        ],
+        correct: ["A", "B", "D"],
+        weight: 3.0
+      },
+      {
+        id: 24,
+        type: 'complex',
+        topic: "Sikap Qana'ah",
+        stimulus: "Sifat qana'ah (merasa cukup dengan pembagian Allah) merupakan perisai terkuat dari penyakit tamak dan hasad.",
+        question: "Perilaku yang mencerminkan nilai qana'ah dalam diri seorang pelajar adalah...",
+        options: [
+          { key: "A", text: "Menerima uang saku dengan penuh syukur tanpa menuntut di luar kesanggupan orang tua." },
+          { key: "B", text: "Tetap berikhtiar maksimal menggapai cita-cita dengan tawakkal." },
+          { key: "C", text: "Malas belajar karena menganggap hasil nilai sudah ditakdirkan." },
+          { key: "D", text: "Tidak silau dengan barang mewah yang dibawa oleh kawan sebaya." },
+          { key: "E", text: "Meminjam barang orang lain secara paksa agar tampak keren." }
+        ],
+        correct: ["A", "B", "D"],
+        weight: 3.0
+      },
+      {
+        id: 25,
+        type: 'complex',
+        topic: "Tafsir Q.S. At-Taubah: 105",
+        stimulus: "Kandungan Q.S. At-Taubah ayat 105 memuat landasan teologis pengawasan amal perbuatan manusia.",
+        question: "Siapakah pihak-pihak yang akan menyaksikan amal pekerjaan seorang hamba sebagaimana termaktub dalam ayat tersebut?",
+        options: [
+          { key: "A", text: "Allah Subhanahu wa Ta'ala" },
+          { key: "B", text: "Rasul-Nya (Nabi Muhammad saw.)" },
+          { key: "C", text: "Orang-orang mukmin di sekitarnya" },
+          { key: "D", text: "Iblis dan bala tentaranya" },
+          { key: "E", text: "Ruh nenek moyang masa lampau" }
+        ],
+        correct: ["A", "B", "C"],
+        weight: 3.0
+      },
+      {
+        id: 26,
+        type: 'complex',
+        topic: "Perilaku Sum'ah di Media Sosial",
+        stimulus: "Media sosial saat ini memfasilitasi seseorang untuk memamerkan ibadah secara digital (vlog sedekah, status tahajud, tweet istighfar).",
+        question: "Agar konten dakwah atau sedekah di media sosial tidak tergelincir menjadi sum'ah atau riya', syarat yang harus dipenuhi adalah...",
+        options: [
+          { key: "A", text: "Menata niat setulusnya untuk edukasi kebaikan dan menginspirasi orang lain." },
+          { key: "B", text: "Senantiasa beristighfar dan tidak kecanduan mengecek jumlah 'like' atau pujian netizen." },
+          { key: "C", text: "Memamerkan nominal sedekah agar orang lain merasa kalah saing." },
+          { key: "D", text: "Menjaga agar ibadah rahasia pribadi tetap lebih banyak daripada yang dipublikasikan." },
+          { key: "E", text: "Mencaci maki orang yang tidak membuat konten sedekah seperti dirinya." }
+        ],
+        correct: ["A", "B", "D"],
+        weight: 3.0
+      },
+      {
+        id: 27,
+        type: 'complex',
+        topic: "Tawadhu' sebagai Penawar Takabbur",
+        stimulus: "Tawadhu' (rendah hati) adalah perhiasan para nabi dan orang sholeh dalam menundukkan hawa nafsu ego.",
+        question: "Manakah tindakan nyata tawadhu' yang dapat dipraktikkan seorang pelajar di sekolah?",
+        options: [
+          { key: "A", text: "Mau mendengarkan masukan atau sanggahan teman saat diskusi kelas dengan lapang dada." },
+          { key: "B", text: "Menyapa lebih dahulu guru, staf tata usaha, maupun penjaga sekolah dengan santun." },
+          { key: "C", text: "Membantu teman yang kesulitan belajar tanpa menyombongkan kecerdasan sendiri." },
+          { key: "D", text: "Memakai seragam lusuh kotor secara sengaja agar dianggap zuhud." },
+          { key: "E", text: "Menolak menjadi ketua kelas karena takut dianggap sok berkuasa." }
+        ],
+        correct: ["A", "B", "C"],
+        weight: 3.0
+      },
+      {
+        id: 28,
+        type: 'complex',
+        topic: "Urgensi Malu (Al-Haya') dalam Iman",
+        stimulus: "Hadis Nabi menyebutkan: <em>'Al-Haya-u syu'batun minal iimaan'</em> (Malu adalah sebagian dari cabang iman).",
+        question: "Penerapan rasa malu yang benar dan proporsional menurut nilai Islam adalah...",
+        options: [
+          { key: "A", text: "Malu berbuat curang saat menempuh asesmen sumatif CBT." },
+          { key: "B", text: "Malu meninggalkan sholat fardhu padahal tubuh sehat wal afiat." },
+          { key: "C", text: "Malu bertanya kepada guru padahal belum memahami materi pelajaran." },
+          { key: "D", text: "Malu mengumbar aurat dan berkata kotor di media pergaulan." },
+          { key: "E", text: "Malu menuntut ilmu karena berasal dari keluarga sederhana." }
+        ],
+        correct: ["A", "B", "D"],
+        weight: 3.0
+      },
+      {
+        id: 29,
+        type: 'complex',
+        topic: "Etika Menggunakan Harta",
+        stimulus: "Harta adalah sarana ibadah menuju akhirat bukan tujuan puncak kehidupan manusia.",
+        question: "Pilihan mana saja yang mencerminkan sikap muslim cerdas dalam mengelola harta kekayaan?",
+        options: [
+          { key: "A", text: "Menunaikan kewajiban zakat, infak, dan sedekah dengan penuh kerelaan." },
+          { key: "B", text: "Menabung dan berinvestasi halal untuk persiapan masa depan keluarga." },
+          { key: "C", text: "Berbelanja secara impulsif mengikuti diskon produk yang tidak dibutuhkan." },
+          { key: "D", text: "Membelanjakan harta untuk menuntut ilmu dan membiayai dakwah kebajikan." },
+          { key: "E", text: "Menimbun sembako saat terjadi bencana agar harga melambung tinggi." }
+        ],
+        correct: ["A", "B", "D"],
+        weight: 3.0
+      },
+      {
+        id: 30,
+        type: 'complex',
+        topic: "Prinsip Amal Kebaikan Diterima Allah",
+        stimulus: "Para ulama merumuskan dua syarat mutlak agar suatu amal kebajikan bernilai pahala di hadapan Allah Swt.",
+        question: "Berdasarkan prinsip syariat, dua rukun diterimanya amal sholeh adalah...",
+        options: [
+          { key: "A", text: "Ikhlas niatnya semata-mata mengharapkan ridha Allah Swt." },
+          { key: "B", text: "Sesuai dengan petunjuk dan sunnah Rasulullah saw. (ittiba')." },
+          { key: "C", text: "Diumumkan di pengeras suara masjid desa setempat." },
+          { key: "D", text: "Mendapat persetujuan dan tanda tangan pejabat pemerintah." },
+          { key: "E", text: "Disertai biaya operasional yang bernilai milyaran rupiah." }
+        ],
+        correct: ["A", "B"],
+        weight: 3.0
+      },
+
+      // ====== 5 SOAL PILIHAN GANDA KATEGORI / ASOSIASI MATRIKS HOTS (Q31 - Q35) ======
+      {
+        id: 31,
+        type: 'category',
+        topic: "Kategori Cabang Iman (Syu'abul Iman)",
+        stimulus: "Syu'abul Iman terbagi menjadi 3 ranah: <strong>[Qalbi]</strong> (Hati), <strong>[Lisani]</strong> (Lisan), dan <strong>[Arkan]</strong> (Amal Perbuatan).",
+        question: "Kelompokkan aktivitas berikut dengan memilih kategori cabang iman yang paling tepat!",
+        items: [
+          { id: "i1", text: "Mencintai Rasulullah melebihi kecintaan pada dunia", answerKey: "Hati" },
+          { id: "i2", text: "Membaca Istighfar memohon ampunan Allah", answerKey: "Lisan" },
+          { id: "i3", text: "Menyantuni anak yatim dan fakir miskin di Mojo", answerKey: "Amal Badan" }
+        ],
+        categoryOptions: ["Hati", "Lisan", "Amal Badan"],
+        weight: 5.0
+      },
+      {
+        id: 32,
+        type: 'category',
+        topic: "Kategori Perilaku Tercela (Mazmumah)",
+        stimulus: "Setiap penyakit hati memiliki motif dan bentuk tindakan yang berbeda-beda.",
+        question: "Pasangkan deskripsi perilaku berikut dengan kategori penyakit hati yang tepat!",
+        items: [
+          { id: "i1", text: "Ingin amal ibadahnya didengar orang agar viral dan dipuji", answerKey: "Sum'ah" },
+          { id: "i2", text: "Merasa diri paling mulia dan memandang rendah kawan", answerKey: "Takabbur" },
+          { id: "i3", text: "Mengharap hilangnya nikmat kepandaian dari teman sekelas", answerKey: "Hasad" }
+        ],
+        categoryOptions: ["Sum'ah", "Takabbur", "Hasad"],
+        weight: 5.0
+      },
+      {
+        id: 33,
+        type: 'category',
+        topic: "Kategori Analisis Pengeluaran Harta",
+        stimulus: "Kebijakan finansial seorang mukmin terbagi dalam tiga koridor: <strong>[Syariat]</strong>, <strong>[Israf]</strong>, dan <strong>[Tabdzir]</strong>.",
+        question: "Tentukan status tindakan berikut ke dalam kategori yang tepat!",
+        items: [
+          { id: "i1", text: "Membeli makanan enak secukupnya untuk nutrisi tubuh sehat", answerKey: "Syariat" },
+          { id: "i2", text: "Membeli pakaian puluhan lembar hingga menumpuk tak terpakai", answerKey: "Israf" },
+          { id: "i3", text: "Mengeluarkan uang untuk taruhan game judi online", answerKey: "Tabdzir" }
+        ],
+        categoryOptions: ["Syariat", "Israf", "Tabdzir"],
+        weight: 5.0
+      },
+      {
+        id: 34,
+        type: 'category',
+        topic: "Kategori Tingkatan Nafsu Manusia",
+        stimulus: "Al-Qur'an mengidentifikasi kondisi kejiwaan manusia saat menanggapi seruan kebajikan.",
+        question: "Klasifikasikan kondisi batin di bawah ini sesuai konsep psikologi Islam!",
+        items: [
+          { id: "i1", text: "Jiwa yang selalu memerintahkan kemaksiatan dan foya-foya", answerKey: "Ammarah" },
+          { id: "i2", text: "Jiwa yang sering menyesali diri setelah berbuat lalai", answerKey: "Lawwamah" },
+          { id: "i3", text: "Jiwa yang tenang dalam ketaatan tauhid dan etos kerja", answerKey: "Muthmainnah" }
+        ],
+        categoryOptions: ["Ammarah", "Lawwamah", "Muthmainnah"],
+        weight: 5.0
+      },
+      {
+        id: 35,
+        type: 'category',
+        topic: "Kategori Hubungan Etos Kerja & Syariat",
+        stimulus: "Sikap kerja memiliki korelasi erat dengan keselarasan akidah seorang muslim.",
+        question: "Tentukan kategori sikap di bawah ini!",
+        items: [
+          { id: "i1", text: "Bekerja keras seraya memohon keberkahan pada Allah", answerKey: "Ikhtiar Terpuji" },
+          { id: "i2", text: "Tidak mau bekerja dan hanya menunggu bantuan tetangga", answerKey: "Sikap Pasif Keliru" },
+          { id: "i3", text: "Menempuh jalan curang memalsukan data demi naik jabatan", answerKey: "Pelanggaran Syariat" }
+        ],
+        categoryOptions: ["Ikhtiar Terpuji", "Sikap Pasif Keliru", "Pelanggaran Syariat"],
+        weight: 5.0
+      }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStoredSettings();
+      setupAntiCheat();
+      renderGasScriptTemplate();
+    });
+
+    function loadStoredSettings() {
+      // Load saved configurations from memory / defaults
+      document.getElementById('labelHintToken').textContent = state.examToken;
+      document.getElementById('inputExamToken').placeholder = `Contoh: ${state.examToken}`;
+      document.getElementById('adminTokenInput').value = state.examToken;
+      document.getElementById('adminDurationInput').value = state.examDuration;
+      document.getElementById('adminGasUrl').value = state.gasUrl;
+      updateRekapCount();
+    }
+
+    // Custom non-blocking modal alert replacement (Never uses browser alert)
+    function showNotification(title, message, isError = false) {
+      const modal = document.getElementById('modalNotice');
+      const titleEl = document.getElementById('noticeTitle');
+      const msgEl = document.getElementById('noticeMessage');
+      const iconEl = document.getElementById('noticeIcon');
+      const iconWrap = document.getElementById('noticeIconContainer');
+
+      titleEl.textContent = title;
+      msgEl.innerHTML = message;
+
+      if (isError) {
+        iconEl.className = "fa-solid fa-triangle-exclamation text-rose-400";
+        iconWrap.className = "w-10 h-10 rounded-full mx-auto flex items-center justify-center text-lg bg-rose-500/20 text-rose-400";
+      } else {
+        iconEl.className = "fa-solid fa-circle-check text-emerald-400";
+        iconWrap.className = "w-10 h-10 rounded-full mx-auto flex items-center justify-center text-lg bg-emerald-500/20 text-emerald-400";
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeNoticeModal() {
+      document.getElementById('modalNotice').classList.add('hidden');
+    }
+
+    function handleStartExam(e) {
+      e.preventDefault();
+      const name = document.getElementById('inputStudentName').value.trim();
+      const nisn = document.getElementById('inputStudentNISN').value.trim();
+      const kelas = document.getElementById('selectStudentClass').value;
+      const token = document.getElementById('inputExamToken').value.trim().toUpperCase();
+
+      if (!name || !nisn || !kelas) {
+        showNotification("Lengkapi Data", "Silakan isi nama, NISN, dan pilih rombel kelas Anda!", true);
+        return;
+      }
+
+      if (token !== state.examToken) {
+        showNotification("Token Salah", "Token ujian tidak valid! Tanyakan token resmi kepada guru pengawas.", true);
+        return;
+      }
+
+      // Initialize session user
+      state.currentUser = {
+        name,
+        nisn,
+        class: kelas,
+        startTime: new Date().toLocaleTimeString('id-ID')
+      };
+
+      // Set user header bar
+      document.getElementById('barStudentName').textContent = name;
+      document.getElementById('barStudentClass').textContent = kelas;
+
+      // Switch screens
+      document.getElementById('viewStudentLogin').classList.add('hidden');
+      document.getElementById('viewExamScreen').classList.remove('hidden');
+
+      // Start countdown timer
+      state.timerSeconds = state.examDuration * 60;
+      startTimer();
+
+      // Render Question 1
+      state.currentIndex = 0;
+      renderCurrentQuestion();
+      renderGridPalette();
+    }
+
+    /* Anti-cheat tab/app switch detection */
+    function setupAntiCheat() {
+      document.addEventListener('visibilitychange', () => {
+        if (!state.currentUser || state.examFinished) return;
+        if (document.hidden) {
+          state.tabSwitchCount++;
+          const badge = document.getElementById('cheatWarningBadge');
+          const countEl = document.getElementById('cheatCount');
+          countEl.textContent = state.tabSwitchCount;
+          badge.classList.remove('hidden');
+
+          if (state.tabSwitchCount === 1) {
+            showNotification(
+              "Peringatan Anti-Cheat!",
+              "Anda terdeteksi membuka tab atau aplikasi lain! Aktivitas ini tercatat dan dilaporkan otomatis ke guru pengawas.",
+              true
+            );
+          } else if (state.tabSwitchCount >= 3) {
+            showNotification(
+              "Pelanggaran Integritas!",
+              `Anda telah keluar aplikasi sebanyak ${state.tabSwitchCount} kali. Kejujuran adalah cermin utama Syu'abul Iman!`,
+              true
+            );
+          }
+        }
+      });
+    }
+
+    function startTimer() {
+      clearInterval(state.timerInterval);
+      const timerDisplay = document.getElementById('timerDisplay');
+
+      state.timerInterval = setInterval(() => {
+        if (state.timerSeconds <= 0) {
+          clearInterval(state.timerInterval);
+          autoFinishTimeUp();
+          return;
+        }
+        state.timerSeconds--;
+        const m = Math.floor(state.timerSeconds / 60);
+        const s = state.timerSeconds % 60;
+        timerDisplay.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+
+        // Change timer color when remaining time is low
+        if (state.timerSeconds < 300) {
+          timerDisplay.className = "font-mono text-sm font-bold text-rose-400 animate-pulse";
+        }
+      }, 1000);
+    }
+
+    function autoFinishTimeUp() {
+      showNotification("Waktu Habis", "Waktu pengerjaan asesmen telah habis. Jawaban Anda otomatis dikumpulkan!", false);
+      executeFinalSubmit();
+    }
+
+    function renderCurrentQuestion() {
+      const q = QUESTION_BANK[state.currentIndex];
+      const qNum = state.currentIndex + 1;
+
+      // Update Top Status
+      document.getElementById('badgeCurrentNum').textContent = qNum;
+      document.getElementById('qHeaderTopic').innerHTML = `<i class="fa-solid fa-tag mr-1"></i> Soal ${qNum} / ${QUESTION_BANK.length} &bull; ${q.topic}`;
+
+      // Update Type Badge
+      const typeBadge = document.getElementById('badgeTypeQuestion');
+      if (q.type === 'single') {
+        typeBadge.textContent = "Pilihan Ganda (Tunggal)";
+        typeBadge.className = "text-emerald-400 font-medium";
+      } else if (q.type === 'complex') {
+        typeBadge.textContent = "Pilihan Ganda Kompleks (Multi-Jawaban)";
+        typeBadge.className = "text-cyan-300 font-medium";
+      } else {
+        typeBadge.textContent = "Pilihan Ganda Kategori / Asosiasi";
+        typeBadge.className = "text-amber-300 font-medium";
+      }
+
+      // Stimulus
+      const stimulusBox = document.getElementById('qStimulusContainer');
+      if (q.stimulus) {
+        stimulusBox.innerHTML = q.stimulus;
+        stimulusBox.classList.remove('hidden');
+      } else {
+        stimulusBox.classList.add('hidden');
+      }
+
+      // Question Text
+      document.getElementById('qText').innerHTML = q.question;
+
+      // Render Options Container by Question Type
+      const optionsBox = document.getElementById('optionsContainer');
+      optionsBox.innerHTML = "";
+
+      const currentAnswer = state.studentAnswers[q.id];
+
+      if (q.type === 'single') {
+        // Tipe PG Tunggal (Radio-like button)
+        q.options.forEach(opt => {
+          const isSelected = currentAnswer === opt.key;
+          const optBtn = document.createElement('button');
+          optBtn.type = "button";
+          optBtn.className = `w-full text-left p-3.5 rounded-xl border transition flex items-start gap-3 text-xs sm:text-sm ${
+            isSelected 
+              ? 'bg-emerald-500/20 border-emerald-400 text-white shadow-md shadow-emerald-500/10' 
+              : 'bg-slate-900/60 border-slate-800 text-gray-300 hover:bg-slate-800/80 hover:border-slate-700'
+          }`;
+          optBtn.onclick = () => selectSingleOption(q.id, opt.key);
+
+          optBtn.innerHTML = `
+            <span class="w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center font-bold text-xs ${
+              isSelected ? 'bg-emerald-500 text-darkbg' : 'bg-slate-800 text-gray-400 border border-slate-700'
+            }">${opt.key}</span>
+            <span class="flex-grow pt-0.5 leading-snug">${opt.text}</span>
+          `;
+          optionsBox.appendChild(optBtn);
+        });
+
+      } else if (q.type === 'complex') {
+        // Tipe PG Kompleks (Multi-select Checkbox)
+        const selectedSet = Array.isArray(currentAnswer) ? new Set(currentAnswer) : new Set();
+
+        const noticeMulti = document.createElement('div');
+        noticeMulti.className = "text-[11px] text-cyan-300/80 mb-1 flex items-center gap-1.5";
+        noticeMulti.innerHTML = `<i class="fa-solid fa-circle-info"></i> Beri tanda centang pada semua pernyataan yang benar.`;
+        optionsBox.appendChild(noticeMulti);
+
+        q.options.forEach(opt => {
+          const isChecked = selectedSet.has(opt.key);
+          const optCard = document.createElement('div');
+          optCard.className = `w-full text-left p-3.5 rounded-xl border transition flex items-start gap-3 cursor-pointer text-xs sm:text-sm ${
+            isChecked 
+              ? 'bg-cyan-950/40 border-cyan-400/80 text-white' 
+              : 'bg-slate-900/60 border-slate-800 text-gray-300 hover:bg-slate-800/80'
+          }`;
+          optCard.onclick = () => toggleComplexOption(q.id, opt.key);
+
+          optCard.innerHTML = `
+            <div class="w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center border transition ${
+              isChecked ? 'bg-cyan-500 border-cyan-400 text-darkbg' : 'border-slate-700 bg-slate-800 text-transparent'
+            }">
+              <i class="fa-solid fa-check text-xs"></i>
+            </div>
+            <div class="flex-grow pt-0.5 leading-snug">
+              <strong class="text-cyan-400 font-bold mr-1">${opt.key}.</strong>
+              ${opt.text}
+            </div>
+          `;
+          optionsBox.appendChild(optCard);
+        });
+
+      } else if (q.type === 'category') {
+        // Tipe PG Kategori (Matriks Pengelompokan HOTS)
+        const currentMap = currentAnswer || {}; // { itemId: selectedCategory }
+
+        const tableWrap = document.createElement('div');
+        tableWrap.className = "overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/70 p-2";
+
+        let matrixHtml = `
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 text-gray-400">
+                <th class="p-2 sm:p-3">Pernyataan / Kasus</th>
+                <th class="p-2 sm:p-3 text-center">Pilihan Kategori</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800">
+        `;
+
+        q.items.forEach(item => {
+          const chosen = currentMap[item.id] || "";
+          matrixHtml += `
+            <tr>
+              <td class="p-2 sm:p-3 text-gray-200">${item.text}</td>
+              <td class="p-2 sm:p-3 text-center">
+                <select onchange="selectCategoryItem(${q.id}, '${item.id}', this.value)" class="bg-slate-800 border border-slate-700 text-emerald-400 rounded-lg py-1.5 px-2 text-xs focus:outline-none focus:border-emerald-500">
+                  <option value="" disabled ${!chosen ? 'selected' : ''}>-- Pilih Kategori --</option>
+                  ${q.categoryOptions.map(cat => `
+                    <option value="${cat}" ${chosen === cat ? 'selected' : ''}>${cat}</option>
+                  `).join('')}
+                </select>
+              </td>
+            </tr>
+          `;
+        });
+
+        matrixHtml += `</tbody></table>`;
+        tableWrap.innerHTML = matrixHtml;
+        optionsBox.appendChild(tableWrap);
+      }
+
+      // Update Bookmark/Ragu-ragu Button appearance
+      updateBookmarkButtonStatus(q.id);
+
+      // Update Navigation Buttons
+      document.getElementById('btnPrev').disabled = state.currentIndex === 0;
+      document.getElementById('btnPrev').className = state.currentIndex === 0 
+        ? 'px-3.5 py-2.5 rounded-xl bg-slate-900 text-slate-600 text-xs sm:text-sm font-semibold cursor-not-allowed'
+        : 'px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition';
+
+      const isLast = state.currentIndex === QUESTION_BANK.length - 1;
+      const nextBtn = document.getElementById('btnNext');
+      if (isLast) {
+        document.getElementById('nextBtnLabel').textContent = "Kumpulkan Ujian";
+        document.getElementById('nextBtnIcon').className = "fa-solid fa-flag-checkered";
+        nextBtn.className = "px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-darkbg font-bold text-xs sm:text-sm flex items-center gap-1.5 transition shadow-lg shadow-emerald-500/20";
+      } else {
+        document.getElementById('nextBtnLabel').textContent = "Selanjutnya";
+        document.getElementById('nextBtnIcon').className = "fa-solid fa-chevron-right";
+        nextBtn.className = "px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition";
+      }
+
+      updateAnsweredStats();
+    }
+
+    function selectSingleOption(qid, choiceKey) {
+      state.studentAnswers[qid] = choiceKey;
+      renderCurrentQuestion();
+      renderGridPalette();
+    }
+
+    function toggleComplexOption(qid, choiceKey) {
+      let current = state.studentAnswers[qid];
+      if (!Array.isArray(current)) {
+        current = [];
+      }
+      const set = new Set(current);
+      if (set.has(choiceKey)) {
+        set.delete(choiceKey);
+      } else {
+        set.add(choiceKey);
+      }
+      state.studentAnswers[qid] = Array.from(set);
+      renderCurrentQuestion();
+      renderGridPalette();
+    }
+
+    function selectCategoryItem(qid, itemId, categoryVal) {
+      if (!state.studentAnswers[qid] || typeof state.studentAnswers[qid] !== 'object') {
+        state.studentAnswers[qid] = {};
+      }
+      state.studentAnswers[qid][itemId] = categoryVal;
+      updateAnsweredStats();
+      renderGridPalette();
+    }
+
+    /* Bookmark / Ragu-ragu handler */
+    function toggleBookmark() {
+      const q = QUESTION_BANK[state.currentIndex];
+      state.doubtfulFlags[q.id] = !state.doubtfulFlags[q.id];
+      updateBookmarkButtonStatus(q.id);
+      renderGridPalette();
+    }
+
+    function updateBookmarkButtonStatus(qid) {
+      const isDoubt = !!state.doubtfulFlags[qid];
+      const btn = document.getElementById('btnBookmark');
+      const icon = document.getElementById('bookmarkIcon');
+      const text = document.getElementById('bookmarkText');
+
+      if (isDoubt) {
+        btn.className = "text-xs px-3 py-1 rounded-lg border border-yellow-500 bg-yellow-500 text-darkbg font-bold flex items-center gap-1.5 transition";
+        icon.className = "fa-solid fa-bookmark";
+        text.textContent = "Ragu-ragu (Aktif)";
+      } else {
+        btn.className = "text-xs px-3 py-1 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 flex items-center gap-1.5 transition";
+        icon.className = "fa-regular fa-bookmark";
+        text.textContent = "Ragu-ragu";
+      }
+    }
+
+    function navigateQuestion(direction) {
+      const isLast = state.currentIndex === QUESTION_BANK.length - 1;
+      if (direction === 1 && isLast) {
+        promptConfirmFinish();
+        return;
+      }
+
+      const target = state.currentIndex + direction;
+      if (target >= 0 && target < QUESTION_BANK.length) {
+        state.currentIndex = target;
+        renderCurrentQuestion();
+      }
+    }
+
+    function jumpToQuestion(index) {
+      state.currentIndex = index;
+      toggleGridModal();
+      renderCurrentQuestion();
+    }
+
+    function renderGridPalette() {
+      const container = document.getElementById('gridPaletteButtons');
+      container.innerHTML = "";
+
+      QUESTION_BANK.forEach((q, idx) => {
+        const isAnswered = checkIsAnswered(q);
+        const isDoubt = !!state.doubtfulFlags[q.id];
+        const isCurrent = state.currentIndex === idx;
+
+        const btn = document.createElement('button');
+        btn.onclick = () => jumpToQuestion(idx);
+
+        let colorClasses = "bg-slate-800 text-gray-300 border-slate-700";
+        if (isDoubt) {
+          colorClasses = "bg-yellow-500 text-darkbg font-extrabold border-yellow-400";
+        } else if (isAnswered) {
+          colorClasses = "bg-emerald-600 text-white font-bold border-emerald-500";
+        }
+
+        if (isCurrent) {
+          colorClasses += " ring-2 ring-emerald-300 ring-offset-2 ring-offset-darkbg";
+        }
+
+        btn.className = `h-10 rounded-xl border text-xs flex items-center justify-center font-mono transition transform active:scale-95 ${colorClasses}`;
+        btn.textContent = idx + 1;
+
+        container.appendChild(btn);
+      });
+
+      updateAnsweredStats();
+    }
+
+    function checkIsAnswered(q) {
+      const ans = state.studentAnswers[q.id];
+      if (q.type === 'single') {
+        return !!ans;
+      } else if (q.type === 'complex') {
+        return Array.isArray(ans) && ans.length > 0;
+      } else if (q.type === 'category') {
+        if (!ans || typeof ans !== 'object') return false;
+        // Check if all items in category question are chosen
+        return q.items.every(item => ans[item.id] && ans[item.id] !== "");
+      }
+      return false;
+    }
+
+    function updateAnsweredStats() {
+      let answeredCount = 0;
+      QUESTION_BANK.forEach(q => {
+        if (checkIsAnswered(q)) answeredCount++;
+      });
+      document.getElementById('answeredStats').textContent = answeredCount;
+    }
+
+    function toggleGridModal() {
+      const modal = document.getElementById('modalGrid');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) {
+        renderGridPalette();
+      }
+    }
+
+    function promptConfirmFinish() {
+      let answered = 0;
+      let doubt = 0;
+
+      QUESTION_BANK.forEach(q => {
+        if (checkIsAnswered(q)) answered++;
+        if (state.doubtfulFlags[q.id]) doubt++;
+      });
+
+      const unanswered = QUESTION_BANK.length - answered;
+
+      document.getElementById('confirmAnsweredCount').textContent = answered;
+      document.getElementById('confirmDoubtCount').textContent = doubt;
+      document.getElementById('confirmUnansweredCount').textContent = unanswered;
+
+      const desc = unanswered > 0 
+        ? `Perhatian! Masih terdapat <strong class="text-rose-400">${unanswered} soal</strong> yang belum Anda jawab.`
+        : `Semua soal telah terjawab lengkap. Anda yakin ingin mengakhiri sesi?`;
+      document.getElementById('confirmSubmitDesc').innerHTML = desc;
+
+      document.getElementById('modalConfirmSubmit').classList.remove('hidden');
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('modalConfirmSubmit').classList.add('hidden');
+    }
+
+    function calculateFinalGrade() {
+      let totalEarned = 0;
+      let maxScore = 0;
+
+      QUESTION_BANK.forEach(q => {
+        maxScore += q.weight;
+        const ans = state.studentAnswers[q.id];
+
+        if (q.type === 'single') {
+          if (ans === q.correct) {
+            totalEarned += q.weight;
+          }
+        } else if (q.type === 'complex') {
+          if (Array.isArray(ans)) {
+            // Evaluasi kesesuaian multi-select
+            const correctSet = new Set(q.correct);
+            const userSet = new Set(ans);
+            let matches = 0;
+            userSet.forEach(k => { if (correctSet.has(k)) matches++; });
+            let incorrects = 0;
+            userSet.forEach(k => { if (!correctSet.has(k)) incorrects++; });
+
+            // Proporsionalitas skor parsial
+            let ratio = (matches - incorrects) / correctSet.size;
+            if (ratio < 0) ratio = 0;
+            totalEarned += (ratio * q.weight);
+          }
+        } else if (q.type === 'category') {
+          if (ans && typeof ans === 'object') {
+            let itemCorrect = 0;
+            q.items.forEach(it => {
+              if (ans[it.id] === it.answerKey) itemCorrect++;
+            });
+            const ratio = itemCorrect / q.items.length;
+            totalEarned += (ratio * q.weight);
+          }
+        }
+      });
+
+      // Konversi skala 0 - 100
+      const finalScaled = Math.round((totalEarned / maxScore) * 100);
+      return Math.min(100, Math.max(0, finalScaled));
+    }
+
+    function executeFinalSubmit() {
+      closeConfirmModal();
+      clearInterval(state.timerInterval);
+      state.examFinished = true;
+
+      const finalGrade = calculateFinalGrade();
+      const submissionTime = new Date().toLocaleString('id-ID');
+
+      // Update Result View
+      document.getElementById('resName').textContent = state.currentUser.name;
+      document.getElementById('resNISN').textContent = state.currentUser.nisn;
+      document.getElementById('resClass').textContent = state.currentUser.class;
+      document.getElementById('resTimestamp').textContent = submissionTime;
+      document.getElementById('resTabSwitches').textContent = `${state.tabSwitchCount} kali`;
+      document.getElementById('resScoreBadge').textContent = `${finalGrade} / 100`;
+
+      // Save to local submissions log
+      const record = {
+        timestamp: submissionTime,
+        nisn: state.currentUser.nisn,
+        name: state.currentUser.name,
+        class: state.currentUser.class,
+        score: finalGrade,
+        tabSwitches: state.tabSwitchCount,
+        answersJson: JSON.stringify(state.studentAnswers),
+        synced: false
+      };
+      state.submissionsLog.push(record);
+      updateRekapTable();
+      updateRekapCount();
+
+      // Show Result screen
+      document.getElementById('viewExamScreen').classList.add('hidden');
+      document.getElementById('viewResult').classList.remove('hidden');
+
+      // Send automatically to Google Apps Script Web App
+      syncResultToGoogleSheets(record);
+    }
+
+    async function syncResultToGoogleSheets(record) {
+      const syncStatusText = document.getElementById('syncStatusText');
+      const syncSpinner = document.getElementById('syncSpinner');
+
+      const targetUrl = state.gasUrl || APP_CONFIG.defaultGasUrl;
+
+      if (!targetUrl || !targetUrl.startsWith('http')) {
+        syncSpinner.className = "fa-solid fa-cloud-slash text-amber-400";
+        syncStatusText.innerHTML = "Tersimpan di memori lokal. <em>(URL Google Apps Script belum disetel)</em>";
+        return;
+      }
+
+      syncStatusText.textContent = "Mengunggah data ke Google Spreadsheet SMAN 1 Mojo...";
+      syncSpinner.className = "fa-solid fa-circle-notch fa-spin text-emerald-400";
+
+      const payload = {
+        action: "submitExam",
+        timestamp: record.timestamp,
+        nisn: record.nisn,
+        name: record.name,
+        class: record.class,
+        score: record.score,
+        tabSwitches: record.tabSwitches,
+        answers: record.answersJson
+      };
+
+      try {
+        // Mode no-cors standard untuk Google Apps Script Web App endpoint
+        await fetch(targetUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        record.synced = true;
+        updateRekapTable();
+        syncSpinner.className = "fa-solid fa-check text-emerald-400";
+        syncStatusText.innerHTML = "<span class='text-emerald-400 font-semibold'>Sukses! Jawaban resmi terkirim ke Google Spreadsheet.</span>";
+      } catch (err) {
+        console.error("Sinkronisasi gagal:", err);
+        syncSpinner.className = "fa-solid fa-triangle-exclamation text-rose-400";
+        syncStatusText.innerHTML = "<span class='text-rose-400'>Gagal terhubung ke Google Apps Script, lembar jawaban diamankan di penyimpanan lokal.</span>";
+      }
+    }
+
+    function downloadStudentReceipt() {
+      const content = `================================================
+BUKTI RESMI ASESMEN SUMATIF PAI KELAS X
+SMAN 1 MOJO KABUPATEN KEDIRI
+================================================
+Nama Peserta  : ${state.currentUser?.name || '-'}
+NISN / No     : ${state.currentUser?.nisn || '-'}
+Kelas         : ${state.currentUser?.class || '-'}
+Waktu Selesai : ${new Date().toLocaleString('id-ID')}
+Nilai Mandiri : ${calculateFinalGrade()} / 100
+Alih Tab/Layar: ${state.tabSwitchCount} kali
+Status Berkas : Valid & Terdokumentasi
+================================================
+Simpan dokumen teks ini sebagai bukti sah asesmen.`;
+
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Bukti_CBT_PAI_${state.currentUser?.name.replace(/\s+/g, '_')}_${state.currentUser?.class}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function openAdminAuthModal() {
+      document.getElementById('inputAdminPass').value = "";
+      document.getElementById('adminAuthError').classList.add('hidden');
+      document.getElementById('modalAdminAuth').classList.remove('hidden');
+    }
+
+    function closeAdminAuthModal() {
+      document.getElementById('modalAdminAuth').classList.add('hidden');
+    }
+
+    function verifyAdminLogin() {
+      const pass = document.getElementById('inputAdminPass').value;
+      if (pass === state.adminPass) {
+        closeAdminAuthModal();
+        document.getElementById('viewStudentLogin').classList.add('hidden');
+        document.getElementById('viewExamScreen').classList.add('hidden');
+        document.getElementById('viewResult').classList.add('hidden');
+        document.getElementById('viewAdminDashboard').classList.remove('hidden');
+        loadStoredSettings();
+      } else {
+        document.getElementById('adminAuthError').classList.remove('hidden');
+      }
+    }
+
+    function exitAdminView() {
+      document.getElementById('viewAdminDashboard').classList.add('hidden');
+      if (state.examFinished) {
+        document.getElementById('viewResult').classList.remove('hidden');
+      } else {
+        document.getElementById('viewStudentLogin').classList.remove('hidden');
+      }
+    }
+
+    function switchAdminTab(tabName) {
+      ['settings', 'responses', 'gascode'].forEach(t => {
+        document.getElementById(`adminTab-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`adminTabBtn-${t}`);
+        btn.className = "py-2 px-4 text-xs font-bold border-b-2 border-transparent text-gray-400 hover:text-gray-200";
+      });
+      document.getElementById(`adminTab-${tabName}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`adminTabBtn-${tabName}`);
+      activeBtn.className = "py-2 px-4 text-xs font-bold border-b-2 border-emerald-400 text-emerald-400";
+    }
+
+    function saveGasUrlConfig() {
+      const url = document.getElementById('adminGasUrl').value.trim();
+      state.gasUrl = url;
+      showNotification("Pengaturan Disimpan", "URL Google Apps Script Web App berhasil diperbarui!");
+    }
+
+    async function testGasConnection() {
+      const url = document.getElementById('adminGasUrl').value.trim();
+      if (!url) {
+        showNotification("URL Kosong", "Masukkan URL Google Apps Script Web App terlebih dahulu!", true);
+        return;
+      }
+      try {
+        await fetch(url, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "pingTest",
+            timestamp: new Date().toLocaleString('id-ID'),
+            nisn: "0000000000",
+            name: "TEST PING ADMIN",
+            class: "X-1",
+            score: 100,
+            tabSwitches: 0,
+            answers: "{}"
+          })
+        });
+        showNotification("Uji Terkirim", "Sinyal uji telah dikirim ke Google Apps Script. Periksa sheet baru di spreadsheet Anda!");
+      } catch (err) {
+        showNotification("Uji Gagal", "Gagal menghubungi endpoint: " + err.message, true);
+      }
+    }
+
+    function saveExamParameters() {
+      const token = document.getElementById('adminTokenInput').value.trim().toUpperCase();
+      const dur = parseInt(document.getElementById('adminDurationInput').value, 10);
+
+      if (!token) {
+        showNotification("Token Kosong", "Token ujian tidak boleh kosong!", true);
+        return;
+      }
+      if (isNaN(dur) || dur < 10) {
+        showNotification("Durasi Salah", "Durasi ujian minimal 10 menit!", true);
+        return;
+      }
+
+      state.examToken = token;
+      state.examDuration = dur;
+      loadStoredSettings();
+      showNotification("Parameter Berhasil Diubah", `Token Ujian baru: <strong>${token}</strong><br>Durasi: <strong>${dur} Menit</strong>.`);
+    }
+
+    function changeAdminPassword() {
+      const p1 = document.getElementById('adminNewPass').value;
+      const p2 = document.getElementById('adminConfirmPass').value;
+
+      if (!p1 || p1.length < 6) {
+        showNotification("Password Lemah", "Password minimal terdiri dari 6 karakter!", true);
+        return;
+      }
+      if (p1 !== p2) {
+        showNotification("Tidak Cocok", "Konfirmasi password baru tidak cocok!", true);
+        return;
+      }
+
+      state.adminPass = p1;
+      document.getElementById('adminNewPass').value = "";
+      document.getElementById('adminConfirmPass').value = "";
+      showNotification("Password Diganti", "Password server admin berhasil diubah!");
+    }
+
+    function updateRekapTable() {
+      const tbody = document.getElementById('tableResponsesBody');
+      tbody.innerHTML = "";
+
+      if (state.submissionsLog.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center p-4 text-gray-500">Belum ada jawaban siswa yang terekam.</td></tr>`;
+        return;
+      }
+
+      state.submissionsLog.forEach((rec) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-900/60";
+        tr.innerHTML = `
+          <td class="p-3 text-gray-400 font-mono text-[10px]">${rec.timestamp}</td>
+          <td class="p-3 font-mono">${rec.nisn}</td>
+          <td class="p-3 font-semibold text-white">${rec.name}</td>
+          <td class="p-3 text-emerald-400 font-bold">${rec.class}</td>
+          <td class="p-3 font-mono font-bold text-yellow-400">${rec.score}</td>
+          <td class="p-3 ${rec.tabSwitches > 0 ? 'text-rose-400 font-bold' : 'text-gray-400'}">${rec.tabSwitches}x</td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded text-[10px] ${rec.synced ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-gray-400'}">
+              ${rec.synced ? 'Tersinkron Cloud' : 'Lokal'}
+            </span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateRekapCount() {
+      document.getElementById('rekapCount').textContent = state.submissionsLog.length;
+    }
+
+    function clearLocalResponses() {
+      if (state.submissionsLog.length === 0) return;
+      state.submissionsLog = [];
+      updateRekapTable();
+      updateRekapCount();
+      showNotification("Dibersihkan", "Semua riwayat pengiriman lokal telah dihapus.");
+    }
+
+    function exportResponsesCSV() {
+      if (state.submissionsLog.length === 0) {
+        showNotification("Data Kosong", "Belum ada rekap nilai untuk diekspor!", true);
+        return;
+      }
+
+      let csv = "Timestamp,NISN,Nama Siswa,Kelas,Skor,Alih Layar,Status Cloud\n";
+      state.submissionsLog.forEach(r => {
+        csv += `"${r.timestamp}","${r.nisn}","${r.name}","${r.class}",${r.score},${r.tabSwitches},"${r.synced ? 'Sinkron' : 'Lokal'}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Rekap_Nilai_CBT_PAI_SMAN1Mojo_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    const GOOGLE_APPS_SCRIPT_TEMPLATE = `/**
+ * GOOGLE APPS SCRIPT - CBT PAI SMAN 1 MOJO (KELAS X-1 s/d X-10)
+ * Tempel kode ini di menu Ekstensi > Apps Script pada Google Spreadsheet Anda.
+ */
+
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    // Buat Baris Header jika sheet masih kosong
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        "WAKTU_SUBMIT", 
+        "NISN", 
+        "NAMA_SISWA", 
+        "KELAS", 
+        "SKOR_AKHIR", 
+        "JUMLAH_ALIH_TAB", 
+        "RINCIAN_JAWABAN_JSON"
+      ]);
+      sheet.getRange(1, 1, 1, 7).setBackground("#059669").setFontColor("#FFFFFF").setFontWeight("bold");
+      sheet.setFrozenRows(1);
+    }
+
+    var data = JSON.parse(e.postData.contents);
+
+    sheet.appendRow([
+      data.timestamp || new Date().toLocaleString("id-ID"),
+      "'" + (data.nisn || ""),
+      data.name || "Anonim",
+      data.class || "-",
+      data.score || 0,
+      data.tabSwitches || 0,
+      data.answers || "{}"
+    ]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "success", message: "Data berhasil disimpan di Google Spreadsheet" }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput("Endpoint CBT PAI SMAN 1 Mojo Aktif.");
+}`;
+
+    function renderGasScriptTemplate() {
+      document.getElementById('gasScriptArea').textContent = GOOGLE_APPS_SCRIPT_TEMPLATE;
+    }
+
+    function copyGasScript() {
+      const area = document.getElementById('gasScriptArea');
+      const tempInput = document.createElement("textarea");
+      tempInput.value = area.textContent;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      showNotification("Tersalin", "Kode Google Apps Script berhasil disalin ke clipboard!");
+    }
+  </script>
+</body>
+</html>
